@@ -1,12 +1,13 @@
 using System.Threading.Tasks;
+using Code.Infrastructure.LoaderServices;
+using Code.ServiceLocator;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
-namespace Code
+namespace Code.Infrastructure.MenuLoader
 {
-    public class Bootstrap : MonoBehaviour
+    public class AsyncMenuLoader : MonoBehaviour //Это бы разделить надо на UI и логику, но мне лень
     {
         [SerializeField] private LoadingProgressBar _progressBar;
         [SerializeField] private Image _imageForURL;
@@ -15,15 +16,21 @@ namespace Code
         [SerializeField] private string _textImageURL;
         [SerializeField] private string _pathToText;
         
-        private readonly AsyncSceneLoader _asyncSceneLoader = new AsyncSceneLoader();
-        private readonly AsyncURLImageLoader _asyncURLImageLoader = new AsyncURLImageLoader();
-        private readonly AsyncResourcesLoader _asyncResourceLoader = new AsyncResourcesLoader();
-        
-        
-        private async void Start()
+        private AsyncSceneLoader _asyncSceneLoader;
+        private AsyncURLImageLoader _asyncURLImageLoader;
+        private AsyncResourcesLoader _asyncResourceLoader;
+
+        public void Construct()
         {
-            await LoadText();
+            _asyncSceneLoader = Services.GetService<AsyncSceneLoader>();
+            _asyncURLImageLoader = Services.GetService<AsyncURLImageLoader>();
+            _asyncResourceLoader = Services.GetService<AsyncResourcesLoader>();
+        }
+
+        public async void Load()
+        {
             await LoadURLImage();
+            await LoadText();
             await NeedLookAtCat();
             await LoadScene();
         }

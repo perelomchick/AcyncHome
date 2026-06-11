@@ -1,26 +1,24 @@
 using System;
 using System.Threading.Tasks;
+using Code.ServiceLocator;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Code
+namespace Code.Infrastructure.LoaderServices
 {
-    public class AsyncResourcesLoader
+    public class AsyncResourcesLoader : IService
     {
-        public async Task<T> LoadResources<T>(string path,Action<float> onProgress) where T : Object
+        public async Task<T> LoadResources<T>(string path,Action<float> onProgress = null) where T : Object
         {
             ResourceRequest request = Resources.LoadAsync<T>(path);
-            
 
             while (!request.isDone)
             {
-                onProgress.Invoke(request.progress);
+                onProgress?.Invoke(request.progress);
                 await Task.Yield();
             }
-            Debug.Log(request.asset as TextAsset);
             
-            onProgress.Invoke(1f);
-            
+            onProgress?.Invoke(1f);
             return request.asset as T;
         }
     }

@@ -1,13 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using Code.ServiceLocator;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Code
+namespace Code.Infrastructure.LoaderServices
 {
-    public class AsyncURLImageLoader
+    public class AsyncURLImageLoader : IService
     {
-        public async Task<Sprite> LoadingImageByURL(string url, Action<float> progressCallback)
+        public async Task<Sprite> LoadingImageByURL(string url, Action<float> progressCallback = null)
         {
             using UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
             request.SendWebRequest();

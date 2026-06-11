@@ -899,9 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18eb09e01df45379c7ed686978b9d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Code.Bootstrap
-  _progressBar: {fileID: 146152730}
-  _imageForURL: {fileID: 1279510389}
-  _textImageURL: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJtPxprrF_67jl_DNoAw72UF4ZRTYEkQc5ew&s
+  _menuLoader: {fileID: 2017507392}
 --- !u!1 &921452134
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +912,7 @@ GameObject:
   - component: {fileID: 921452137}
   - component: {fileID: 921452136}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HintText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -959,9 +957,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041A\u043E\u0442\u0438\u043A\u0438 \u044D\u0442\u043E \u043E\u0447\u0435\u043D\u044C
-    \u0432\u0430\u0436\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C \u043D\u0430\u0448\u0435\u0439
-    \u0436\u0438\u0437\u043D\u0438!"
+  m_text: '-'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1404,12 +1400,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009694896}
   m_CullTransparentMesh: 1
+--- !u!1 &2017507391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017507393}
+  - component: {fileID: 2017507392}
+  m_Layer: 0
+  m_Name: MenuLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2017507392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017507391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6086191869c849a88cfd8cb6908bb603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Code.MenuLoader
+  _progressBar: {fileID: 146152730}
+  _imageForURL: {fileID: 1279510389}
+  _textHint: {fileID: 921452136}
+  _textImageURL: https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ8mjHKYTUgcROGS1gUqsi9lezqsSOyUUNt2yhhfIMVR5BhiBHj
+  _pathToText: HintText
+--- !u!4 &2017507393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017507391}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 665.6278, y: 234.14241, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 168622182}
   - {fileID: 282567437}
+  - {fileID: 2017507393}
   - {fileID: 907383750}
   - {fileID: 300812319}
   - {fileID: 1729486238}

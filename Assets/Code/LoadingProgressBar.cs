@@ -13,7 +13,6 @@ namespace Code
 
         public void SetProgress(float value)
         {
-            Debug.Log("SetProgress "  + value);
             _progressBar.value = value;
             _progressText.text = TEMPLATE_LOADING_TEXT.Replace(ConstName.LOADING_VALUE_NAME, (value * 100).ToString("F1"));
         }

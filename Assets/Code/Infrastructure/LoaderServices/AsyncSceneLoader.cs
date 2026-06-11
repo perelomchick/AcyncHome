@@ -1,10 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Code.ServiceLocator;
 using UnityEngine.SceneManagement;
 
-namespace Code
+namespace Code.Infrastructure.LoaderServices
 {
-    public class AsyncSceneLoader
+    public class AsyncSceneLoader : IService
     {
         public async Task LoadScene(string sceneName, Action<float> progressCallback)
         {
