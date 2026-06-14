@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Code.Game;
 using Code.Game.Data;
 using UnityEngine;
 using UnityEngine.Networking;

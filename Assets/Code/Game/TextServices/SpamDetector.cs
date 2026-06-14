@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using Code.Infrastructure.ServiceLocator;
-using UnityEngine;
 
 namespace Code.Game.TextServices
 {

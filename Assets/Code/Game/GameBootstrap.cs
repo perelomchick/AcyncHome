@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
 using System.Threading;
 using Code.Game.TextServices;
 using Code.Game.UI;
 using Code.Infrastructure.LoaderServices;
 using Code.Infrastructure.ServiceLocator;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace Code.Game
 {

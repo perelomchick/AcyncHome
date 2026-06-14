@@ -11,7 +11,7 @@ namespace Code.Game.TextServices
         private const int DELAY_SYMBOL = 80;
         private const int DELAY_PUNCTUAL_SYMBOL = 160;
         
-        private readonly List<char> _punctual_symbols = new() { '.', ',', '!' };
+        private readonly List<char> _punctualSymbols = new() { '.', ',', '!' };
         
         public async Task Print(string text, Action<string> callback,CancellationToken token)
         {
@@ -23,7 +23,7 @@ namespace Code.Game.TextServices
                 showText += symbol;
                 callback.Invoke(showText);
                 
-                if(_punctual_symbols.Contains(symbol))
+                if(_punctualSymbols.Contains(symbol))
                     await Task.Delay(DELAY_SYMBOL, token);
                 else
                     await Task.Delay(DELAY_PUNCTUAL_SYMBOL, token);

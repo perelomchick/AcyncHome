@@ -3,7 +3,6 @@ using Code.Game.Data;
 using Code.Game.TextServices;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Code.Game.UI
