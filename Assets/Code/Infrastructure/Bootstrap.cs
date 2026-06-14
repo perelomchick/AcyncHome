@@ -1,6 +1,7 @@
+using Code.Game.UI;
+using Code.Infrastructure.Loader;
 using Code.Infrastructure.LoaderServices;
-using Code.Infrastructure.MenuLoader;
-using Code.ServiceLocator;
+using Code.Infrastructure.ServiceLocator;
 using UnityEngine;
 
 
@@ -8,16 +9,25 @@ namespace Code.Infrastructure
 {
     public class Bootstrap : MonoBehaviour
     {
-         [SerializeField] private AsyncMenuLoader _menuLoader;
+        [SerializeField] private LoadingUI _loadingUI;
+        
+        [SerializeField] private string _pathNextScene;
+        [SerializeField] private string _pathToTextAsset;
+        [SerializeField] private string _urlImage;
         
         private void Awake()
         {
-            Services.Register<AsyncSceneLoader>(new AsyncSceneLoader());
-            Services.Register<AsyncURLImageLoader>(new AsyncURLImageLoader());
-            Services.Register<AsyncResourcesLoader>(new AsyncResourcesLoader());
+            RegisterServices();
             
-            _menuLoader.Construct();
-            _menuLoader.Load();
+            var sceneLoader = Services.GetService<SceneLoader>();
+            _loadingUI.Construct(sceneLoader);
+            sceneLoader.LoadAsync(_pathNextScene, _pathToTextAsset, _urlImage);
+        }
+
+        private void RegisterServices()
+        {
+            Services.Register<ILoadService>(new LoadService());
+            Services.Register(new SceneLoader(Services.GetService<ILoadService>()));
         }
     }
 }

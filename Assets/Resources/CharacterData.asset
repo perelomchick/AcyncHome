@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 365c930709b34ce7afa8450614dc99cb, type: 3}
-  m_Name: Character
+  m_Name: CharacterData
   m_EditorClassIdentifier: Assembly-CSharp::Code.Game.Character
   Name: Cat
   UFXIcon: https://i.pinimg.com/1200x/97/ed/8d/97ed8d66c5ec2427b5ba8cf428a50387.jpg

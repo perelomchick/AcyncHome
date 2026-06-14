@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Code.Common
+namespace Code.EditTool
 {
     [DefaultExecutionOrder(-100)]
     public class SwishToBoot : MonoBehaviour

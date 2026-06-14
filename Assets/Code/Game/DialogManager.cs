@@ -1,45 +1,54 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Code.Game.UI;
-using Code.Infrastructure;
+using Code.Game.Data;
+using Code.Game.TextServices;
 using Code.Infrastructure.LoaderServices;
-using Code.ServiceLocator;
-using UnityEngine;
+using Code.Infrastructure.ServiceLocator;
 
 namespace Code.Game
 {
-    public class DialogManager : IContructer
+    public class DialogManager : IService
     {
-        private ShowTextGradually _showTextGradually;
-        private AsyncCharacterLoader _asyncCharacterLoader;
-        private DialogUI _dialogUI;
+        private readonly TextPrinter _textPrinter;
+        private readonly ILoadService _loadService;
         
-        private int _indexMassage = -1;
-        private CharacterData _characterData;
-        public void Construct()
+        private int _indexMessage = -1;
+        private CancellationTokenSource _currentDialogToken = new();
+        private CharacterData _currentCharacterData;  
+
+        public string TriggerMessageCharacter => _currentCharacterData.TriggerMessage;
+        
+        public Action<CharacterData> OnLoadedCharacterData;
+        public Action<string> OnNextMassage;
+        
+        public DialogManager(ILoadService loadService, TextPrinter textPrinter)
         {
-            _showTextGradually = Services.GetService<ShowTextGradually>();
-            _asyncCharacterLoader = Services.GetService<AsyncCharacterLoader>();
-            _dialogUI = Services.GetService<DialogUI>();
+            _loadService = loadService;
+            _textPrinter = textPrinter;
         }
         
         public async Task Load(string pathToCharacter)
         {
-            var loadCharacter = _asyncCharacterLoader.LoadCharacterData(pathToCharacter);
+            var loadCharacter = _loadService.LoadCharacterDataAsync(pathToCharacter);
             await loadCharacter;
             
-            _characterData = loadCharacter.Result;
+            _currentCharacterData = loadCharacter.Result;
             
-            _dialogUI.SetCharacter(_characterData.Icon,_characterData.Name);
+            OnLoadedCharacterData?.Invoke(_currentCharacterData);
         }
 
-        public async Task NextMassageCharacter(CancellationToken token)
-        {            
-            if(_indexMassage >= _characterData.Messages.Length)
-                return;
-            
-            _indexMassage++;
-            await _showTextGradually.PrintAnimText(_characterData.Messages[_indexMassage],x => _dialogUI.SetMessage(x),token);
+        public async Task NextMassageCharacter(CancellationToken spamToken)
+        {
+            _currentDialogToken.Cancel();
+            _currentDialogToken = new();
+            spamToken.ThrowIfCancellationRequested();
+            if (_indexMessage >= _currentCharacterData.Messages.Length - 1) return;
+
+            await _textPrinter.Print(
+                _currentCharacterData.Messages[++_indexMessage],
+                x => OnNextMassage?.Invoke(x),
+                _currentDialogToken.Token);
         }
     }
 }

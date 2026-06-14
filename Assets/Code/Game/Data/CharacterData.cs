@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Game
+namespace Code.Game.Data
 {
-    [CreateAssetMenu(fileName = "Character", menuName = "Character", order = 0)]
+    [CreateAssetMenu(fileName = "CharacterData", menuName = "CharacterData", order = 0)]
     public class CharacterData : ScriptableObject
     {
         public string Name;
@@ -12,6 +11,5 @@ namespace Code.Game
 
         public string[] Messages;
         public string TriggerMessage;
-        public Dictionary<TriggerType, string> Triggers;
     }
 }
